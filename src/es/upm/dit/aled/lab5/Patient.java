@@ -164,7 +164,18 @@ public class Patient extends Thread {
 	 */
 	@Override
 	public void run() {
-		// TODO
+		
+		while(this.indexProtocol<this.protocol.size()) {
+		this.location.enter(this);
+		//1.Ser atendido en la ubicación actual.
+		this.attendedAtLocation();
+		this.location.exit(this);
+		//2. Avanzar al siguiente paso en su protocolo.
+		this.advanceProtocol();
+		}
+		//this.attendedAtLocation(); DUDA
+		EmergencyRoomGUI.getInstance().removePatient(this);
+		System.out.println("Patient " + this.number + " protocol finished at " + this.location);
 	}
 
 }
